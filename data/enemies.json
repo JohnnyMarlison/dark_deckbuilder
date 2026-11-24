@@ -1,0 +1,220 @@
+{
+  "regular": [
+    {
+      "name": "Гоблин-душегуб",
+      "role": "Гоблин",
+      "hp": 68,
+      "actions": [
+        {"type": "Атака", "name": "Ржавый заточ", "effects": [{"type": "damage", "value": 10}]},
+        {"type": "Заклинание", "name": "Горсть пепла", "effects": [{"type": "damage", "value": 6}, {"type": "steal_stamina", "value": 1}]},
+        {"type": "Защита", "name": "Крысиный отскок", "effects": [{"type": "block", "value": 8}]},
+        {"type": "Исцеление", "name": "Гнилой гриб", "effects": [{"type": "heal", "value": 7}]}
+      ]
+    },
+    {
+      "name": "Кровавый Огр",
+      "role": "Огр",
+      "hp": 95,
+      "actions": [
+        {"type": "Атака", "name": "Пролом черепа", "effects": [{"type": "damage", "value": 17}]},
+        {"type": "Защита", "name": "Дубленая шкура", "effects": [{"type": "block", "value": 13}]},
+        {"type": "Исцеление", "name": "Сырое мясо", "effects": [{"type": "heal", "value": 12}]},
+        {"type": "Атака", "name": "Размашистый рев", "effects": [{"type": "damage", "value": 12}, {"type": "block", "value": 6}]}
+      ]
+    },
+    {
+      "name": "Павший Скелет",
+      "role": "Скелет",
+      "hp": 75,
+      "actions": [
+        {"type": "Атака", "name": "Удар ржавым мечом", "effects": [{"type": "damage", "value": 12}]},
+        {"type": "Защита", "name": "Стена щитов", "effects": [{"type": "block", "value": 10}]},
+        {"type": "Исцеление", "name": "Сборка костей", "effects": [{"type": "heal", "value": 8}]}
+      ]
+    },
+    {
+      "name": "Скелет-стрелок",
+      "role": "Скелет-стрелок",
+      "hp": 70,
+      "actions": [
+        {"type": "Атака", "name": "Проклятая стрела", "effects": [{"type": "damage", "value": 10, "pierce": true}]},
+        {"type": "Атака", "name": "Залп из темноты", "effects": [{"type": "damage", "value": 15}]},
+        {"type": "Защита", "name": "Шаг в тень", "effects": [{"type": "block", "value": 7}]},
+        {"type": "Исцеление", "name": "Зелье праха", "effects": [{"type": "heal", "value": 7}]}
+      ]
+    },
+    {
+      "name": "Могильный Слизняк",
+      "role": "Слизняк",
+      "hp": 82,
+      "actions": [
+        {"type": "Заклинание", "name": "Кислотный плевок", "effects": [{"type": "damage", "value": 11, "pierce": true}]},
+        {"type": "Исцеление", "name": "Деление клеток", "effects": [{"type": "heal", "value": 13}]},
+        {"type": "Защита", "name": "Вязкий панцирь", "effects": [{"type": "block", "value": 9}]}
+      ]
+    },
+    {
+      "name": "Чумной Зомби",
+      "role": "Зомби",
+      "hp": 88,
+      "actions": [
+        {"type": "Атака", "name": "Трупный захват", "effects": [{"type": "damage", "value": 13}]},
+        {"type": "Исцеление", "name": "Пожирание плоти", "effects": [{"type": "damage", "value": 8}, {"type": "heal", "value": 9}]},
+        {"type": "Защита", "name": "Окоченение", "effects": [{"type": "block", "value": 8}]}
+      ]
+    },
+    {
+      "name": "Безликий Вор",
+      "role": "Вор",
+      "hp": 72,
+      "actions": [
+        {"type": "Заклинание", "name": "Отравленный дротик", "effects": [{"type": "damage", "value": 7}, {"type": "steal_stamina", "value": 1}]},
+        {"type": "Атака", "name": "Удар в спину", "effects": [{"type": "damage", "value": 14}]},
+        {"type": "Защита", "name": "Дымовая бомба", "effects": [{"type": "block", "value": 11}]},
+        {"type": "Исцеление", "name": "Краденый эликсир", "effects": [{"type": "heal", "value": 8}]}
+      ]
+    },
+    {
+      "name": "Проклятая Мумия",
+      "role": "Мумия",
+      "hp": 85,
+      "actions": [
+        {"type": "Заклинание", "name": "Песчаное проклятие", "effects": [{"type": "damage", "value": 12, "pierce": true}]},
+        {"type": "Защита", "name": "Саван пустыни", "effects": [{"type": "block", "value": 13}]},
+        {"type": "Исцеление", "name": "Древний ритуал", "effects": [{"type": "heal", "value": 10}]}
+      ]
+    }
+  ],
+  "bosses": [
+    {
+      "name": "БОСС: Архи-Некромант",
+      "role": "Некромант",
+      "hp": 135,
+      "actions": [
+        {"type": "Заклинание", "name": "Жатва душ", "effects": [{"type": "damage", "value": 14}, {"type": "heal", "value": 12}]},
+        {"type": "Заклинание", "name": "Иссушение", "effects": [{"type": "damage", "value": 10}, {"type": "steal_stamina", "value": 1}]},
+        {"type": "Защита", "name": "Костяной бастион", "effects": [{"type": "block", "value": 15}]},
+        {"type": "Исцеление", "name": "Темное переливание", "effects": [{"type": "heal", "value": 16}]}
+      ]
+    },
+    {
+      "name": "БОСС: Костяной Гигант",
+      "role": "Костяной Гигант",
+      "hp": 160,
+      "actions": [
+        {"type": "Атака", "name": "Обвал склепа", "effects": [{"type": "damage", "value": 21}]},
+        {"type": "Защита", "name": "Монолит костей", "effects": [{"type": "block", "value": 18}]},
+        {"type": "Атака", "name": "Дробящий топот", "effects": [{"type": "damage", "value": 15, "pierce": true}]},
+        {"type": "Исцеление", "name": "Поглощение праха", "effects": [{"type": "heal", "value": 14}]}
+      ]
+    },
+    {
+      "name": "БОСС: Злой Волшебник",
+      "role": "Злой Волшебник",
+      "hp": 130,
+      "actions": [
+        {"type": "Заклинание", "name": "Черный метеор", "effects": [{"type": "damage", "value": 20}]},
+        {"type": "Заклинание", "name": "Выжигание разума", "effects": [{"type": "damage", "value": 12}, {"type": "steal_stamina", "value": 1}]},
+        {"type": "Защита", "name": "Зеркальный барьер", "effects": [{"type": "block", "value": 14}]},
+        {"type": "Исцеление", "name": "Кровавая алхимия", "effects": [{"type": "heal", "value": 15}]}
+      ]
+    },
+    {
+      "name": "БОСС: Адский Цербер",
+      "role": "Цербер",
+      "hp": 145,
+      "actions": [
+        {"type": "Атака", "name": "Тройные клыки", "effects": [{"type": "damage", "value": 19}]},
+        {"type": "Заклинание", "name": "Дыхание Тартара", "effects": [{"type": "damage", "value": 14, "pierce": true}]},
+        {"type": "Защита", "name": "Пепельная шкура", "effects": [{"type": "block", "value": 15}]},
+        {"type": "Исцеление", "name": "Пожирание искр", "effects": [{"type": "heal", "value": 13}]}
+      ]
+    }
+  ],
+    "rare_bosses": [
+    {
+      "name": "СЕКРЕТНЫЙ БОСС: Тёмный Магический Рыцарь",
+      "role": "Тёмный Рыцарь",
+      "hp": 1350,
+      "spawn_chance": 0.10,
+      "actions": [
+        {
+          "type": "Атака",
+          "name": "Удар пылающей булавой",
+          "effects": [{"type": "damage", "value": 14}]
+        },
+        {
+          "type": "Защита",
+          "name": "Непробиваемый обсидиан",
+          "effects": [{"type": "block", "value": 24}]
+        },
+        {
+          "type": "Заклинание",
+          "name": "Клинок Тёмного Властелина",
+          "effects": [{"type": "damage", "value": 11, "pierce": true}, {"type": "block", "value": 12}]
+        },
+        {
+          "type": "Исцеление",
+          "name": "Перековка доспеха в пламени",
+          "effects": [{"type": "heal", "value": 18}, {"type": "block", "value": 15}]
+        }
+      ]
+    }
+  ],
+   "elite_guards": [
+    {
+      "name": "ЭЛИТА: Гигантский Скелет с Топором",
+      "role": "Скелет-Палач",
+      "hp": 240,
+      "actions": [
+        {
+          "type": "Атака",
+          "name": "Казнь секирой",
+          "effects": [{"type": "damage", "value": 24}]
+        },
+        {
+          "type": "Атака",
+          "name": "Раскол щита",
+          "effects": [{"type": "damage", "value": 16, "pierce": true}]
+        },
+        {
+          "type": "Защита",
+          "name": "Костяной панцирь",
+          "effects": [{"type": "block", "value": 20}]
+        },
+        {
+          "type": "Исцеление",
+          "name": "Темная спайка костей",
+          "effects": [{"type": "heal", "value": 16}, {"type": "block", "value": 10}]
+        }
+      ]
+    },
+    {
+      "name": "ЭЛИТА: Тёмный Скелет-Маг",
+      "role": "Скелет-Маг",
+      "hp": 210,
+      "actions": [
+        {
+          "type": "Заклинание",
+          "name": "Сфера некро-огня",
+          "effects": [{"type": "damage", "value": 22}]
+        },
+        {
+          "type": "Заклинание",
+          "name": "Вытягивание сил",
+          "effects": [{"type": "damage", "value": 14}, {"type": "steal_stamina", "value": 1}]
+        },
+        {
+          "type": "Защита",
+          "name": "Барьер пустоты",
+          "effects": [{"type": "block", "value": 22}]
+        },
+        {
+          "type": "Исцеление",
+          "name": "Поглощение душ",
+          "effects": [{"type": "heal", "value": 18}]
+        }
+      ]
+    }
+  ]
+}

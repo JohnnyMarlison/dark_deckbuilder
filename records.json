@@ -1,0 +1,33 @@
+{
+  "heroes": {
+    "Воин": {
+      "wins": 0,
+      "games": 0,
+      "best_turns": null,
+      "max_ng": 0
+    },
+    "Пиромант": {
+      "wins": 0,
+      "games": 0,
+      "best_turns": null,
+      "max_ng": 0
+    },
+    "Паладин": {
+      "wins": 0,
+      "games": 0,
+      "best_turns": null,
+      "max_ng": 0
+    },
+    "Ассасин": {
+      "wins": 1,
+      "games": 4,
+      "best_turns": 22,
+      "max_ng": 0
+    }
+  },
+  "achievements": [
+    "assassin_1",
+    "assassin_2",
+    "mage_1"
+  ]
+}

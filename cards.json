@@ -1,0 +1,333 @@
+{
+    "warrior_helm": {
+    "name": "Шлем воина",
+    "type": "Защита",
+    "cost": 0,
+    "desc": "Даёт 3 защиты, тянет 1 карту.",
+    "effects": [{"type": "block", "value": 2}, {"type": "draw", "value": 1}]
+  },
+  "warrior_armor": {
+    "name": "Доспехи воина",
+    "type": "Защита",
+    "cost": 2,
+    "exhaust": true,
+    "desc": "Даёт 6 защиты, +1 к макс. стамине. Изгнание.",
+    "effects": [{"type": "block", "value": 4}, {"type": "max_stamina", "value": 1}]
+  },
+  "warrior_shield": {
+    "name": "Щит воина",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Даёт 4 защиты, восстанавливает 1 стамину.",
+    "effects": [{"type": "block", "value": 2}, {"type": "stamina", "value": 1}]
+  },
+  "warrior_cloak": {
+    "name": "Плащ воина",
+    "type": "Исцеление",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "Лечит 5 HP, +1 стамина. Изгнание.",
+    "effects": [{"type": "heal", "value": 5}, {"type": "stamina", "value": 1}]
+  },
+  "warrior_sword": {
+    "name": "Меч воина",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 10 урона + ваша текущая защита.",
+    "effects": [{"type": "block_damage", "value": 10}]
+  },
+  "warrior_valor": {
+    "name": "Доблесть воина",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 12 урона сквозь броню врага.",
+    "effects": [{"type": "damage", "value": 12, "pierce": true}]
+  },
+  "warrior_swordmaster": {
+    "name": "Мастер меча",
+    "type": "Заклинание",
+    "cost": 1,
+    "desc": "Полностью сбрасывает всю защиту врага.",
+    "effects": [{"type": "strip_block"}]
+  },
+  "warrior_courage": {
+    "name": "Отвага воина",
+    "type": "Атака",
+    "cost": 2,
+    "desc": "Наносит 15 урона сквозь броню. Вы теряете 3 HP.",
+    "effects": [{"type": "damage", "value": 15, "pierce": true}, {"type": "self_damage", "value": 3}]
+  },
+  "warrior_shield_bash": {
+    "name": "Удар щитом",
+    "type": "Атака",
+    "cost": 0,
+    "desc": "Наносит 5 урона + ваша текущая защита.",
+    "effects": [{"type": "block_damage", "value": 5}]
+  },
+  "warrior_fury": {
+    "name": "Воинская ярость",
+    "type": "Атака",
+    "cost": 3,
+    "desc": "Наносит 15 урона, лечит 8 HP, даёт 8 защиты.",
+    "effects": [{"type": "damage", "value": 15}, {"type": "heal", "value": 6}, {"type": "block", "value": 6}]
+  },
+  "bandage": {
+    "name": "Перевязка",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 6 HP",
+    "effects": [{"type": "heal", "value": 6}]
+  },
+  "spark": {
+    "name": "Искра",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 6 урона",
+    "effects": [{"type": "damage", "value": 6}]
+  },
+  "fireball": {
+    "name": "Огненный шар",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "Наносит 16 урона",
+    "effects": [{"type": "damage", "value": 16}]
+  },
+  "flame_shield": {
+    "name": "Огненный щит",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 5 брони",
+    "effects": [{"type": "block", "value": 5}]
+  },
+    "meditation": {
+    "name": "Медитация",
+    "type": "Заклинание",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "+1 Стамина, +1 карта. Изгнание.",
+    "effects": [{"type": "stamina", "value": 1}, {"type": "draw", "value": 1}]
+  },
+
+  "cauterize": {
+    "name": "Прижигание",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 7 HP",
+    "effects": [{"type": "heal", "value": 7}]
+  },
+  "meteor": {
+    "name": "Метеор",
+    "type": "Заклинание",
+    "cost": 3,
+    "desc": "Наносит 25 урона",
+    "effects": [{"type": "damage", "value": 25}]
+  },
+  "smite": {
+    "name": "Карающий удар",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 6 урона",
+    "effects": [{"type": "damage", "value": 6}]
+  },
+  "bastion": {
+    "name": "Бастион веры",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 7 брони",
+    "effects": [{"type": "block", "value": 7}]
+  },
+  "prayer": {
+    "name": "Молитва света",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 8 HP",
+    "effects": [{"type": "heal", "value": 8}]
+  },
+  "holy_wrath": {
+    "name": "Небесный гнев",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "10 урона и лечит 5 HP",
+    "effects": [{"type": "damage", "value": 10}, {"type": "heal", "value": 5}]
+  },
+  "consecrate": {
+    "name": "Освящение",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "8 урона и 8 брони",
+    "effects": [{"type": "damage", "value": 8}, {"type": "block", "value": 8}]
+  },
+  "quick_slash": {
+    "name": "Быстрый выпад",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 5 урона и +1 карта",
+    "effects": [{"type": "damage", "value": 5}, {"type": "draw", "value": 1}]
+  },
+  "poison_knife": {
+    "name": "Отравленный нож",
+    "type": "Атака",
+    "cost": 0,
+    "desc": "Наносит 4 урона",
+    "effects": [{"type": "damage", "value": 4}]
+  },
+  "evade": {
+    "name": "Уклонение",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 5 брони",
+    "effects": [{"type": "block", "value": 5}]
+  },
+    "adrenaline": {
+    "name": "Адреналин",
+    "type": "Заклинание",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "+2 Стамины. Изгнание.",
+    "effects": [{"type": "stamina", "value": 2}]
+  },
+
+  "backstab": {
+    "name": "Удар в спину",
+    "type": "Атака",
+    "cost": 2,
+    "desc": "Наносит 14 урона",
+    "effects": [{"type": "damage", "value": 14}]
+  },
+  "shadow_elixir": {
+    "name": "Эликсир тени",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 6 HP и 3 брони",
+    "effects": [{"type": "heal", "value": 6}, {"type": "block", "value": 3}]
+  },
+    "neutral_light_strike": {
+    "name": "Лёгкий удар",
+    "type": "Атака",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 4,
+    "desc": "Наносит 5 урона.",
+    "effects": [{"type": "damage", "value": 5}]
+  },
+  "neutral_medium_strike": {
+    "name": "Средний удар",
+    "type": "Атака",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 4,
+    "desc": "Наносит 7 урона.",
+    "effects": [{"type": "damage", "value": 7}]
+  },
+  "neutral_heavy_strike": {
+    "name": "Крепкий удар",
+    "type": "Атака",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Наносит 9 урона.",
+    "effects": [{"type": "damage", "value": 9}]
+  },
+  "neutral_piercing_strike": {
+    "name": "Пронзающий удар",
+    "type": "Атака",
+    "cost": 2,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Наносит 11 урона сквозь броню.",
+    "effects": [{"type": "damage", "value": 11, "pierce": true}]
+  },
+  "neutral_crushing_strike": {
+    "name": "Сокрушительный удар",
+    "type": "Атака",
+    "cost": 2,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Наносит 13 урона.",
+    "effects": [{"type": "damage", "value": 13}]
+  },
+  "neutral_small_heal": {
+    "name": "Маленькое зелье исцеления",
+    "type": "Исцеление",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 4,
+    "desc": "Восстанавливает 4 HP.",
+    "effects": [{"type": "heal", "value": 4}]
+  },
+  "neutral_medium_heal": {
+    "name": "Среднее зелье исцеления",
+    "type": "Исцеление",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Восстанавливает 6 HP.",
+    "effects": [{"type": "heal", "value": 6}]
+  },
+  "neutral_large_heal": {
+    "name": "Большое зелье исцеления",
+    "type": "Исцеление",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Восстанавливает 8 HP.",
+    "effects": [{"type": "heal", "value": 8}]
+  },
+  "neutral_huge_heal": {
+    "name": "Крупнейшее зелье исцеления",
+    "type": "Исцеление",
+    "cost": 2,
+    "neutral": true,
+    "pool_count": 2,
+    "desc": "Восстанавливает 12 HP.",
+    "effects": [{"type": "heal", "value": 12}]
+  },
+  "neutral_small_shield": {
+    "name": "Маленькое зелье защиты",
+    "type": "Защита",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Даёт +1 брони.",
+    "effects": [{"type": "block", "value": 1}]
+  },
+  "neutral_medium_shield": {
+    "name": "Среднее зелье защиты",
+    "type": "Защита",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Даёт +2 брони.",
+    "effects": [{"type": "block", "value": 2}]
+  },
+  "neutral_small_pill": {
+    "name": "Маленькая пилюля силы",
+    "type": "Заклинание",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 4,
+    "exhaust": true,
+    "desc": "+1 Стамина, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 1}, {"type": "draw", "value": 1}]
+  },
+  "neutral_medium_pill": {
+    "name": "Средняя пилюля силы",
+    "type": "Заклинание",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 3,
+    "exhaust": true,
+    "desc": "+2 Стамины, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 2}, {"type": "draw", "value": 1}]
+  },
+  "neutral_large_pill": {
+    "name": "Большая пилюля силы",
+    "type": "Заклинание",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 2,
+    "exhaust": true,
+    "desc": "+3 Стамины, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 3}, {"type": "draw", "value": 1}]
+  }
+}

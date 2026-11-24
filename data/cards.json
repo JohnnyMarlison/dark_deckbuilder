@@ -1,0 +1,160 @@
+{
+  "strike_warrior": {
+    "name": "Удар мечом",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 7 урона",
+    "effects": [{"type": "damage", "value": 7}]
+  },
+  "defend_warrior": {
+    "name": "Глухая оборона",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 6 брони",
+    "effects": [{"type": "block", "value": 6}]
+  },
+  "crush": {
+    "name": "Сокрушение",
+    "type": "Атака",
+    "cost": 2,
+    "desc": "Наносит 15 урона",
+    "effects": [{"type": "damage", "value": 15}]
+  },
+  "battle_cry": {
+    "name": "Боевой клич",
+    "type": "Заклинание",
+    "cost": 1,
+    "desc": "Дает 4 брони и +1 карту",
+    "effects": [{"type": "block", "value": 4}, {"type": "draw", "value": 1}]
+  },
+  "bandage": {
+    "name": "Перевязка",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 6 HP",
+    "effects": [{"type": "heal", "value": 6}]
+  },
+  "spark": {
+    "name": "Искра",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 6 урона",
+    "effects": [{"type": "damage", "value": 6}]
+  },
+  "fireball": {
+    "name": "Огненный шар",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "Наносит 16 урона",
+    "effects": [{"type": "damage", "value": 16}]
+  },
+  "flame_shield": {
+    "name": "Огненный щит",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 5 брони",
+    "effects": [{"type": "block", "value": 5}]
+  },
+    "meditation": {
+    "name": "Медитация",
+    "type": "Заклинание",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "+1 Стамина, +1 карта. Изгнание.",
+    "effects": [{"type": "stamina", "value": 1}, {"type": "draw", "value": 1}]
+  },
+
+  "cauterize": {
+    "name": "Прижигание",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 7 HP",
+    "effects": [{"type": "heal", "value": 7}]
+  },
+  "meteor": {
+    "name": "Метеор",
+    "type": "Заклинание",
+    "cost": 3,
+    "desc": "Наносит 25 урона",
+    "effects": [{"type": "damage", "value": 25}]
+  },
+  "smite": {
+    "name": "Карающий удар",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 6 урона",
+    "effects": [{"type": "damage", "value": 6}]
+  },
+  "bastion": {
+    "name": "Бастион веры",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 7 брони",
+    "effects": [{"type": "block", "value": 7}]
+  },
+  "prayer": {
+    "name": "Молитва света",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 8 HP",
+    "effects": [{"type": "heal", "value": 8}]
+  },
+  "holy_wrath": {
+    "name": "Небесный гнев",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "10 урона и лечит 5 HP",
+    "effects": [{"type": "damage", "value": 10}, {"type": "heal", "value": 5}]
+  },
+  "consecrate": {
+    "name": "Освящение",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "8 урона и 8 брони",
+    "effects": [{"type": "damage", "value": 8}, {"type": "block", "value": 8}]
+  },
+  "quick_slash": {
+    "name": "Быстрый выпад",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 5 урона и +1 карта",
+    "effects": [{"type": "damage", "value": 5}, {"type": "draw", "value": 1}]
+  },
+  "poison_knife": {
+    "name": "Отравленный нож",
+    "type": "Атака",
+    "cost": 0,
+    "desc": "Наносит 4 урона",
+    "effects": [{"type": "damage", "value": 4}]
+  },
+  "evade": {
+    "name": "Уклонение",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Дает 5 брони",
+    "effects": [{"type": "block", "value": 5}]
+  },
+    "adrenaline": {
+    "name": "Адреналин",
+    "type": "Заклинание",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "+2 Стамины. Изгнание.",
+    "effects": [{"type": "stamina", "value": 2}]
+  },
+
+  "backstab": {
+    "name": "Удар в спину",
+    "type": "Атака",
+    "cost": 2,
+    "desc": "Наносит 14 урона",
+    "effects": [{"type": "damage", "value": 14}]
+  },
+  "shadow_elixir": {
+    "name": "Эликсир тени",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Лечит 6 HP и 3 брони",
+    "effects": [{"type": "heal", "value": 6}, {"type": "block", "value": 3}]
+  }
+}
