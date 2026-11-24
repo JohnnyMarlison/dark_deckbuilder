@@ -1,8 +1,0 @@
-.venv/
-venv/
-.idea/
-__pycache__/
-*.pyc
-build/
-dist/
-nuitka-crash-report.xml
