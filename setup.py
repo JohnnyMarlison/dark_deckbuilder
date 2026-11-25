@@ -3,25 +3,16 @@ from cx_Freeze import setup, Executable
 
 build_exe_options = {
     "packages": ["arcade", "pyglet", "xml", "core", "views", "visuals", "audio"],
-    "include_files": ["data"],
+    "include_files": ["data", "cards.json", "records.json"],
     "excludes": ["tkinter", "unittest", "email", "http", "pydoc"],
 }
 
-
-
-# Убираем чёрное консольное окно в Windows
-base = "Win32GUI" if sys.platform == "win32" else None
+base = "gui" if sys.platform == "win32" else None
 
 setup(
     name="DarkDeckbuilder",
-    version="3.5",
-    description="Тёмный Колодострой",
+    version="5.0",
+    description="Dark Fantasy Roguelike Deckbuilder",
     options={"build_exe": build_exe_options},
-    executables=[
-        Executable(
-            ".venv/dark_deckbuilder/main.py",
-            base=base,
-            target_name="DarkDeckbuilder.exe",
-        )
-    ],
+    executables=[Executable("main.py", base=base, target_name="DarkDeckbuilder.exe")],
 )

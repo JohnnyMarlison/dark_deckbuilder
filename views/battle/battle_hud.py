@@ -142,8 +142,8 @@ class BattleHUD:
 
         # 5. Кнопки стопок Колоды и Сброса (слева внизу, с разными анимированными иконками)
         for rect, is_hov, anim_t, title, count, is_disc in (
-            (self.v.deck_btn, self.v.deck_hovered, self.v.deck_anim_time, "Колода", len(hero.draw_pile), False),
-            (self.v.discard_btn, self.v.discard_hovered, self.v.discard_anim_time, "Сброс", len(hero.discard_pile), True),
+                (self.v.deck_btn, self.v.deck_hovered, self.v.deck_anim_time, "Колода", len(hero.draw_pile), False),
+                (self.v.discard_btn, self.v.discard_hovered, self.v.discard_anim_time, "Сброс", len(hero.discard_pile), True),
         ):
             bx, by, bw, bh = rect
             bg = (36, 33, 46) if is_hov else (22, 20, 28)
@@ -214,35 +214,40 @@ class BattleHUD:
         if not items:
             return
 
-        ui = self.v.ui_text
-        mx = getattr(self.v, "mouse_x", -1)
-        my = getattr(self.v, "mouse_y", -1)
+            ui = self.v.ui_text
+            mx = getattr(self.v, "mouse_x", -1)
+            my = getattr(self.v, "mouse_y", -1)
 
-        ui.draw("УСИЛЕНИЯ ПОХОДА:", 28, 304, TEXT_MUTED, 11, bold=True, anchor_x="left")
-        for i, (icon_type, badge, desc) in enumerate(items):
-            col = i % 3
-            row = i // 3
-            bx = 58 + col * 74
-            by = 262 + row * 78
-            is_hov = (abs(mx - bx) <= 24 and abs(my - by) <= 24)
-            if is_hov:
-                self._hovered_bonus_desc = desc
+            rows = (len(items) + 2) // 3
+            top_row_y = 262 + (rows - 1) * 78
+            self._bonuses_top_y = top_row_y + 42
 
-            arcade.draw_circle_filled(bx, by, 20, (36, 33, 46) if is_hov else PANEL_DARK)
-            arcade.draw_circle_outline(bx, by, 20, arcade.color.YELLOW if is_hov else BORDER_GOLD,
-                                       2.2 if is_hov else 1.6)
-            draw_card_icon(icon_type, bx, by, size=14)
-            ui.draw(badge, bx, by - 36, BORDER_GOLD, 11, bold=True, anchor_x="center", anchor_y="center")
+            ui.draw("УСИЛЕНИЯ ПОХОДА:", 28, self._bonuses_top_y, TEXT_MUTED, 11, bold=True, anchor_x="left")
+            for i, (icon_type, badge, desc) in enumerate(items):
+                col = i % 3
+                row = i // 3
+                bx = 58 + col * 74
+                by = 262 + row * 78
+                is_hov = (abs(mx - bx) <= 24 and abs(my - by) <= 24)
+                if is_hov:
+                    self._hovered_bonus_desc = desc
+
+                arcade.draw_circle_filled(bx, by, 20, (36, 33, 46) if is_hov else PANEL_DARK)
+                arcade.draw_circle_outline(bx, by, 20, arcade.color.YELLOW if is_hov else BORDER_GOLD,
+                                           2.2 if is_hov else 1.6)
+                draw_card_icon(icon_type, bx, by, size=14)
+                ui.draw(badge, bx, by - 36, BORDER_GOLD, 11, bold=True, anchor_x="center", anchor_y="center")
 
     def draw_tooltip(self):
-        """Отрисовывает всплывающую подсказку усиления строго поверх карт и всех элементов боя."""
+        """Отрисовывает всплывающую подсказку строго выше всех рядов усилений и поверх карт."""
         desc = getattr(self, "_hovered_bonus_desc", "")
         if not desc:
             return
-        arcade.draw_rect_filled(arcade.XYWH(235, 352, 410, 56), (18, 16, 24, 252))
-        arcade.draw_rect_outline(arcade.XYWH(235, 352, 410, 56), BORDER_GOLD, 2.0)
+        tip_y = getattr(self, "_bonuses_top_y", 304) + 46
+        arcade.draw_rect_filled(arcade.XYWH(235, tip_y, 410, 56), (18, 16, 24, 252))
+        arcade.draw_rect_outline(arcade.XYWH(235, tip_y, 410, 56), BORDER_GOLD, 2.0)
         self.v.ui_text.draw(
-            desc, 235, 352, TEXT_PARCHMENT, 12,
+            desc, 235, tip_y, TEXT_PARCHMENT, 12,
             width=384, align="center", anchor_x="center", anchor_y="center", multiline=True
         )
 

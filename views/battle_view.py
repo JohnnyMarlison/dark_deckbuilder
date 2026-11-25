@@ -6,10 +6,9 @@ from core.run_state import RunState
 from core.combat import CombatEngine
 from core.effects import CombatEvent
 from core.enemy import Enemy
-from visuals.avatar import CharacterAvatar
+from visuals.sprites.avatar import CharacterAvatar
 from visuals.card_widget import CardWidget
 from visuals.particles import SpellProjectile, FloatingEffect
-from visuals.icons import draw_enemy_choice_icons, draw_card_icon
 from visuals.locations import draw_location_background
 from visuals.achievement_popup import AchievementToastManager
 from visuals.icons import draw_enemy_choice_icons, draw_card_icon, draw_stat_icon
@@ -216,6 +215,8 @@ class BattleView(arcade.View):
         if outcome == "GAME_OVER":
             self.substate = "GAME_OVER"
             self.message = "Вы пали во тьме! [R] — заново | [ESC] — главное меню"
+            self.vfx.unbind()
+            self.ng_exit_btn = (SCREEN_WIDTH / 2, 415, 330, 62)
             return
 
         self._begin_player_turn()
@@ -393,6 +394,29 @@ class BattleView(arcade.View):
         if self.substate == "BOSS_VICTORY":
             self._draw_boss_victory_overlay()
 
+
+        if self.substate in ("FINAL_VICTORY", "GAME_OVER"):
+            is_win = (self.substate == "FINAL_VICTORY")
+            arcade.draw_rect_filled(arcade.XYWH(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT), (10, 9, 14, 225))
+            arcade.draw_rect_filled(arcade.XYWH(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 40, 780, 340), (18, 16, 24, 248))
+            arcade.draw_rect_outline(arcade.XYWH(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 40, 780, 340), BORDER_GOLD, 3)
+
+            title = "ВЛАДЫКА ТЬМЫ ПОВЕРЖЕН!" if is_win else "ВЫ ПАЛИ ВО ТЬМЕ..."
+            sub = f"Победа одержана за {getattr(self.run, 'total_turns', self.turn_count)} ходов (НГ+{getattr(self.run, 'ng_level', 0)})!" if is_win else "Тьма поглотила героя, но летопись сохранила ваш путь."
+            self.ui_text.draw(title, SCREEN_WIDTH / 2, 650, BORDER_GOLD, 32, bold=True, anchor_x="center")
+            self.ui_text.draw(sub, SCREEN_WIDTH / 2, 585, TEXT_PARCHMENT, 17, anchor_x="center")
+
+            if is_win:
+                cx, cy, cw, ch = getattr(self, "ng_continue_btn", (SCREEN_WIDTH / 2 - 190, 415, 330, 62))
+                arcade.draw_rect_filled(arcade.XYWH(cx, cy, cw, ch), (38, 76, 52))
+                arcade.draw_rect_outline(arcade.XYWH(cx, cy, cw, ch), BORDER_GOLD, 2)
+                self.ui_text.draw(f"Продолжить (НГ+{getattr(self.run, 'ng_level', 0) + 1})", cx, cy, TEXT_PARCHMENT, 17, bold=True, anchor_x="center", anchor_y="center")
+
+            ex, ey, ew, eh = getattr(self, "ng_exit_btn", (SCREEN_WIDTH / 2, 415, 330, 62))
+            arcade.draw_rect_filled(arcade.XYWH(ex, ey, ew, eh), (42, 48, 72))
+            arcade.draw_rect_outline(arcade.XYWH(ex, ey, ew, eh), BORDER_GOLD, 2)
+            self.ui_text.draw("В главное меню", ex, ey, TEXT_PARCHMENT, 17, bold=True, anchor_x="center", anchor_y="center")
+
         self.toast_manager.draw()
 
     def _draw_active_bonuses(self):
@@ -484,6 +508,20 @@ class BattleView(arcade.View):
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
         if button != arcade.MOUSE_BUTTON_LEFT:
             return
+
+        if self.substate in ("FINAL_VICTORY", "GAME_OVER"):
+            if self.substate == "FINAL_VICTORY":
+                cx, cy, cw, ch = getattr(self, "ng_continue_btn", (SCREEN_WIDTH / 2 - 190, 415, 330, 62))
+                if cx - cw / 2 <= x <= cx + cw / 2 and cy - ch / 2 <= y <= cy + ch / 2:
+                    self.run.start_new_game_plus()
+                    self.window.show_view(BattleView(self.run))
+                    return
+            ex, ey, ew, eh = getattr(self, "ng_exit_btn", (SCREEN_WIDTH / 2, 415, 330, 62))
+            if ex - ew / 2 <= x <= ex + ew / 2 and ey - eh / 2 <= y <= ey + eh / 2:
+                from views.menu.menu_view import MenuView
+                self.window.show_view(MenuView())
+            return
+
 
         if self.substate == "BOSS_VICTORY":
             cx, cy, cw, ch = self.ng_continue_btn
