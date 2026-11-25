@@ -38,17 +38,20 @@ def load_records() -> dict:
             for hero in DEFAULT_HEROES
         },
         "achievements": [],
+        "seen_enemies": [],
+        "seen_cards": [],
     }
     if os.path.exists(RECORDS_FILE):
         try:
             with open(RECORDS_FILE, "r", encoding="utf-8") as f:
                 saved = json.load(f)
-                # Поддержка старого формата records.json
                 if "heroes" in saved:
                     for h in DEFAULT_HEROES:
                         if h in saved["heroes"]:
                             data["heroes"][h].update(saved["heroes"][h])
                     data["achievements"] = list(saved.get("achievements", []))
+                    data["seen_enemies"] = list(saved.get("seen_enemies", []))
+                    data["seen_cards"] = list(saved.get("seen_cards", []))
                 else:
                     for h in DEFAULT_HEROES:
                         if h in saved:
@@ -56,6 +59,7 @@ def load_records() -> dict:
         except (OSError, json.JSONDecodeError):
             pass
     return data
+
 
 
 def _save_records(data: dict):
@@ -103,3 +107,27 @@ def update_record(hero_name: str, won: bool, turns: int, ng_level: int = 0):
             heroes[hero_name]["best_turns"] = turns
 
     _save_records(data)
+
+def mark_enemy_seen(enemy_name: str):
+    """Открывает врага или босса в Энциклопедии при первой встрече в бою."""
+    if not enemy_name:
+        return
+    data = load_records()
+    if enemy_name not in data["seen_enemies"]:
+        data["seen_enemies"].append(enemy_name)
+        _save_records(data)
+
+
+def mark_cards_seen(card_ids: list[str]):
+    """Открывает карты в Каталоге при их первом появлении в руке."""
+    if not card_ids:
+        return
+    data = load_records()
+    changed = False
+    for cid in card_ids:
+        base_id = cid.replace("_plus", "")
+        if base_id not in data["seen_cards"]:
+            data["seen_cards"].append(base_id)
+            changed = True
+    if changed:
+        _save_records(data)

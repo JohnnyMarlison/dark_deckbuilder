@@ -1,2 +1,8 @@
 # created by virtualenv automatically
 .venv/Lib
+.venv
+dist
+.idea
+main.build
+main.dist
+build

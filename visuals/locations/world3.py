@@ -40,7 +40,7 @@ def draw_undead_dungeon(t: float):
 
 
 def draw_ice_crown(t: float):
-    draw_horizon_base((16, 25, 38), (20, 28, 38), (72, 105, 135))
+    draw_horizon_base(sky_color=(16, 25, 38), ground_color=(20, 28, 38), line_color=(72, 105, 135))
     peaks = (
         ((120, 615), (420, 960), (720, 615)),
         ((580, 615), (960, 1020), (1340, 615)),
@@ -48,8 +48,8 @@ def draw_ice_crown(t: float):
     )
     for p1, p2, p3 in peaks:
         arcade.draw_polygon_filled((p1, p2, p3), (32, 52, 76))
-        cap_l = ((p1 + p2) * 0.5, (p1 + p2) * 0.5)
-        cap_r = ((p3 + p2) * 0.5, (p3 + p2) * 0.5)
+        cap_l = ((p1[0] + p2[0]) * 0.5, (p1[1] + p2[1]) * 0.5)
+        cap_r = ((p3[0] + p2[0]) * 0.5, (p3[1] + p2[1]) * 0.5)
         arcade.draw_polygon_filled((cap_l, p2, cap_r), (150, 185, 215, 165))
 
     arcade.draw_ellipse_filled(360, 615, 460, 64, (130, 165, 195, 140))
@@ -60,6 +60,7 @@ def draw_ice_crown(t: float):
         arcade.draw_rect_outline(arcade.XYWH(kx, 765, 54, 300), (145, 200, 235), 2)
         draw_skull_pile(kx, 615, scale=1.1)
         draw_candle_holder(kx + (55 if kx < 960 else -55), 615, t, flame_color=(95, 200, 255))
+
 
     for i in range(50):
         sx = (i * 173 - t * (190 + (i % 4) * 35)) % 1920

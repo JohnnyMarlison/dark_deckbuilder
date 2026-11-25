@@ -1,7 +1,7 @@
 import random
 from core.hero import Hero, create_hero
 from core.card import Card
-from core.effects import DamageEffect, HealEffect
+from core.effects import DamageEffect, HealEffect, BlockEffect, BlockDamageEffect
 
 WORLD_LOCATIONS = {
     1: ("Мрачный лес", "Заброшенная деревня", "Лагерь разбойников"),
@@ -22,6 +22,16 @@ class RunState:
         self.total_turns: int = 1
         self.bonuses: dict[str, int] = {"max_hp": 0, "damage": 0, "heal": 0}
         self.current_location_name: str = random.choice(WORLD_LOCATIONS.get(1, ("Мрачный лес",)))
+        self.bonuses: dict[str, int] = {
+            "max_hp": 0,
+            "neutral_damage": 0,
+            "neutral_heal": 0,
+            "neutral_block": 0,
+            "hero_damage": 0,
+            "hero_heal": 0,
+            "hero_block": 0,
+        }
+
 
     @property
     def location(self) -> int:
@@ -54,24 +64,48 @@ class RunState:
         hp_gain = max(6, int(self.base_hero_hp * random.uniform(0.10, 0.12)))
         self.hero.max_hp += hp_gain
         self.bonuses["max_hp"] += hp_gain
-        healed = self.hero.heal(max(4, int(self.hero.max_hp * random.uniform(0.06, 0.10))))
+        healed = self.hero.heal(max(5, int(self.hero.max_hp * random.uniform(0.10, 0.15))))
         self.advance_step()
         return hp_gain, healed
 
-    def apply_deck_buff(self, buff_type: str, amount: int):
-        if buff_type in self.bonuses:
-            self.bonuses[buff_type] += amount
-        for card in self.hero.master_deck:
+    def apply_deck_buff(self, scope: str, stat: str, amount: int):
+        """
+        scope: 'neutral' или 'hero'
+        stat: 'damage' (+3), 'heal' (+3) или 'block' (+2)
+        """
+        bonus_key = f"{scope}_{stat}"
+        if bonus_key in self.bonuses:
+            self.bonuses[bonus_key] += amount
+
+        target_deck = self.hero.neutral_master_deck if scope == "neutral" else self.hero.hero_master_deck
+
+        for card in target_deck:
             updated = False
             for eff in card.effects:
-                if buff_type == "damage" and isinstance(eff, DamageEffect):
+                if stat == "damage" and isinstance(eff, (DamageEffect, BlockDamageEffect)):
                     eff.value += amount
                     updated = True
-                elif buff_type == "heal" and isinstance(eff, HealEffect):
+                elif stat == "heal" and isinstance(eff, HealEffect):
                     eff.value += amount
                     updated = True
+                elif stat == "block" and isinstance(eff, BlockEffect):
+                    eff.value += amount
+                    updated = True
+
             if updated:
-                card.desc = ", ".join(e.describe(1.0) for e in card.effects if e.describe(1.0))
+                # Пересобираем описание карты с учётом изгнания и пробивания
+                parts = []
+                for e in card.effects:
+                    d = e.describe(1.0)
+                    if d:
+                        if isinstance(e, DamageEffect) and e.pierce:
+                            d += " сквозь броню"
+                        parts.append(d)
+                new_desc = ", ".join(parts) + "."
+                if getattr(card, "exhaust", False):
+                    new_desc += " Изгнание."
+                card.desc = new_desc
+
         self.advance_step()
 
     def generate_boss_card_choices(self, count: int = 4) -> list[Card]:
@@ -86,7 +120,10 @@ class RunState:
 
     def add_cards_to_deck(self, cards: list[Card]):
         for c in cards:
-            self.hero.master_deck.append(c.copy())
+            if c.neutral:
+                self.hero.neutral_master_deck.append(c.copy())
+            else:
+                self.hero.hero_master_deck.append(c.copy())
 
     def start_new_game_plus(self):
         self.ng_level += 1

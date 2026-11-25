@@ -1,0 +1,74 @@
+{
+  "warrior_helm": {
+    "name": "Шлем воина",
+    "type": "Защита",
+    "cost": 0,
+    "desc": "Даёт 3 защиты, тянет 1 карту.",
+    "effects": [{"type": "block", "value": 3}, {"type": "draw", "value": 1}]
+  },
+  "warrior_armor": {
+    "name": "Доспехи воина",
+    "type": "Защита",
+    "cost": 2,
+    "exhaust": true,
+    "desc": "Даёт 6 защиты, +1 к макс. стамине. Изгнание.",
+    "effects": [{"type": "block", "value": 6}, {"type": "max_stamina", "value": 1}]
+  },
+  "warrior_shield": {
+    "name": "Щит воина",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Даёт 4 защиты, восстанавливает 1 стамину.",
+    "effects": [{"type": "block", "value": 4}, {"type": "stamina", "value": 1}]
+  },
+  "warrior_cloak": {
+    "name": "Плащ воина",
+    "type": "Исцеление",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "Лечит 5 HP, +1 стамина. Изгнание.",
+    "effects": [{"type": "heal", "value": 5}, {"type": "stamina", "value": 1}]
+  },
+  "warrior_sword": {
+    "name": "Меч воина",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 10 урона + ваша текущая защита.",
+    "effects": [{"type": "block_damage", "value": 10}]
+  },
+  "warrior_valor": {
+    "name": "Доблесть воина",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 12 урона сквозь броню врага.",
+    "effects": [{"type": "damage", "value": 12, "pierce": true}]
+  },
+  "warrior_swordmaster": {
+    "name": "Мастер меча",
+    "type": "Заклинание",
+    "cost": 1,
+    "desc": "Полностью сбрасывает всю защиту врага.",
+    "effects": [{"type": "strip_block"}]
+  },
+  "warrior_courage": {
+    "name": "Отвага воина",
+    "type": "Атака",
+    "cost": 2,
+    "desc": "Наносит 15 урона сквозь броню. Вы теряете 3 HP.",
+    "effects": [{"type": "damage", "value": 15, "pierce": true}, {"type": "self_damage", "value": 3}]
+  },
+  "warrior_shield_bash": {
+    "name": "Удар щитом",
+    "type": "Атака",
+    "cost": 0,
+    "desc": "Наносит 5 урона + ваша текущая защита.",
+    "effects": [{"type": "block_damage", "value": 5}]
+  },
+  "warrior_fury": {
+    "name": "Воинская ярость",
+    "type": "Атака",
+    "cost": 3,
+    "desc": "Наносит 15 урона, лечит 8 HP, даёт 8 защиты.",
+    "effects": [{"type": "damage", "value": 15}, {"type": "heal", "value": 8}, {"type": "block", "value": 8}]
+  }
+}

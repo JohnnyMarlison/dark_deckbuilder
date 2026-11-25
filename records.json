@@ -1,12 +1,12 @@
 {
   "heroes": {
     "Воин": {
-      "wins": 0,
-      "games": 0,
-      "best_turns": null,
+      "wins": 4,
+      "games": 5,
+      "best_turns": 76,
       "max_ng": 0
     },
-    "Пиромант": {
+    "Элементалист": {
       "wins": 0,
       "games": 0,
       "best_turns": null,
@@ -20,7 +20,7 @@
     },
     "Ассасин": {
       "wins": 1,
-      "games": 4,
+      "games": 6,
       "best_turns": 22,
       "max_ng": 0
     }
@@ -28,6 +28,76 @@
   "achievements": [
     "assassin_1",
     "assassin_2",
-    "mage_1"
+    "mage_1",
+    "warrior_1",
+    "warrior_2",
+    "warrior_3",
+    "slay_dark_knight",
+    "ng_plus_win",
+    "assassin_3",
+    "paladin_1",
+    "paladin_2",
+    "paladin_3"
+  ],
+  "seen_enemies": [
+    "Павший Скелет",
+    "Могильный Слизняк",
+    "Безликий Вор",
+    "Лесной Гоблин",
+    "Болотный Слизняк",
+    "Ночной Вор",
+    "Костяной Воин",
+    "БОСС: Кристальный дракон",
+    "БОСС: Верховный Лич",
+    "Скелет-Лучник",
+    "Пещерный Огр",
+    "ЭЛИТА: Чёрный Скелет-Маг",
+    "СЕКРЕТНЫЙ БОСС: Тёмный Магический Рыцарь",
+    "БОСС: Король Гоблинов",
+    "Древняя Мумия",
+    "ЭЛИТА: Колосс Бездны",
+    "Чумной Зомби",
+    "ЭЛИТА: Костяной Страж с Топором"
+  ],
+  "seen_cards": [
+    "neutral_small_pill",
+    "neutral_piercing_strike",
+    "neutral_medium_heal",
+    "warrior_cloak",
+    "neutral_medium_strike",
+    "warrior_shield_bash",
+    "neutral_medium_pill",
+    "neutral_medium_shield",
+    "neutral_crushing_strike",
+    "warrior_sword",
+    "warrior_swordmaster",
+    "neutral_heavy_strike",
+    "neutral_huge_heal",
+    "neutral_small_heal",
+    "warrior_courage",
+    "neutral_small_shield",
+    "neutral_light_strike",
+    "warrior_valor",
+    "warrior_helm",
+    "warrior_shield",
+    "neutral_large_pill",
+    "warrior_armor",
+    "warrior_fury",
+    "neutral_large_heal",
+    "spark",
+    "mana_shield",
+    "holy_strike",
+    "quick_stab",
+    "shadow_step",
+    "fireball",
+    "judgment",
+    "backstab",
+    "meditation",
+    "blessed_shield",
+    "lay_on_hands",
+    "aegis_faith",
+    "adrenaline",
+    "dark_elixir",
+    "cauterize"
   ]
 }

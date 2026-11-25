@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Лесной Гоблин",
+    "role": "Гоблин",
+    "hp": 45,
+    "actions": [
+      {"type": "Атака", "name": "Ржавый кинжал", "effects": [{"type": "damage", "value": 8}]},
+      {"type": "Защита", "name": "Уклонение в тень", "effects": [{"type": "block", "value": 6}]}
+    ]
+  },
+  {
+    "name": "Костяной Воин",
+    "role": "Скелет",
+    "hp": 52,
+    "actions": [
+      {"type": "Атака", "name": "Удар мечом", "effects": [{"type": "damage", "value": 9}]},
+      {"type": "Защита", "name": "Щит из костей", "effects": [{"type": "block", "value": 8}]}
+    ]
+  },
+  {
+    "name": "Болотный Слизняк",
+    "role": "Слизняк",
+    "hp": 60,
+    "actions": [
+      {"type": "Атака", "name": "Кислотный плевок", "effects": [{"type": "damage", "value": 7}]},
+      {"type": "Исцеление", "name": "Регенерация слизи", "effects": [{"type": "heal", "value": 6}]}
+    ]
+  },
+  {
+    "name": "Ночной Вор",
+    "role": "Вор",
+    "hp": 48,
+    "actions": [
+      {"type": "Атака", "name": "Подлый выпад", "effects": [{"type": "damage", "value": 10}]},
+      {"type": "Заклинание", "name": "Кража сил", "effects": [{"type": "damage", "value": 5}, {"type": "steal_stamina", "value": 1}]}
+    ]
+  },
+  {
+    "name": "Пещерный Огр",
+    "role": "Огр",
+    "hp": 95,
+    "actions": [
+      {"type": "Атака", "name": "Сокрушение дубиной", "effects": [{"type": "damage", "value": 15}]},
+      {"type": "Защита", "name": "Толстая шкура", "effects": [{"type": "block", "value": 12}]}
+    ]
+  },
+  {
+    "name": "Скелет-Лучник",
+    "role": "Скелет-стрелок",
+    "hp": 72,
+    "actions": [
+      {"type": "Атака", "name": "Точный выстрел", "effects": [{"type": "damage", "value": 13}]},
+      {"type": "Атака", "name": "Залп стрел", "effects": [{"type": "damage", "value": 9, "pierce": true}]}
+    ]
+  },
+  {
+    "name": "Чумной Зомби",
+    "role": "Зомби",
+    "hp": 88,
+    "actions": [
+      {"type": "Атака", "name": "Тяжёлый укус", "effects": [{"type": "damage", "value": 12}]},
+      {"type": "Исцеление", "name": "Пожирание плоти", "effects": [{"type": "heal", "value": 9}]}
+    ]
+  },
+  {
+    "name": "Древняя Мумия",
+    "role": "Мумия",
+    "hp": 82,
+    "actions": [
+      {"type": "Заклинание", "name": "Проклятие песков", "effects": [{"type": "damage", "value": 11}, {"type": "steal_stamina", "value": 1}]},
+      {"type": "Защита", "name": "Покров бинтов", "effects": [{"type": "block", "value": 14}]}
+    ]
+  }
+]

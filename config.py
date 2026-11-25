@@ -1,3 +1,13 @@
+import os
+import sys
+
+
+def resource_path(relative_path: str) -> str:
+    """Возвращает корректный путь к ресурсам как при запуске из Python, так и внутри .exe."""
+    base_path = getattr(sys, "_MEIPASS", os.path.abspath("."))
+    return os.path.join(base_path, relative_path)
+
+
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 SCREEN_TITLE = "Тёмный Колодострой — Dark Fantasy v3"

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "ЭЛИТА: Костяной Страж с Топором",
+    "role": "Костяной Страж",
+    "hp": 130,
+    "actions": [
+      {"type": "Атака", "name": "Казнящий замах", "effects": [{"type": "damage", "value": 18}]},
+      {"type": "Защита", "name": "Тяжелый доспех стражи", "effects": [{"type": "block", "value": 15}]}
+    ]
+  },
+  {
+    "name": "ЭЛИТА: Чёрный Скелет-Маг",
+    "role": "Чёрный Скелет-Маг",
+    "hp": 110,
+    "actions": [
+      {"type": "Заклинание", "name": "Стрела Бездны", "effects": [{"type": "damage", "value": 14}]},
+      {"type": "Заклинание", "name": "Проклятие увядания", "effects": [{"type": "damage", "value": 8}, {"type": "steal_stamina", "value": 1}]}
+    ]
+  },
+  {
+    "name": "ЭЛИТА: Колосс Бездны",
+    "role": "Скелет-гигант",
+    "hp": 150,
+    "actions": [
+      {"type": "Атака", "name": "Сокрушение титана", "effects": [{"type": "damage", "value": 20}]},
+      {"type": "Защита", "name": "Несокрушимый остов", "effects": [{"type": "block", "value": 16}]}
+    ]
+  }
+]

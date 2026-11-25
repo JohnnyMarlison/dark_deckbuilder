@@ -1,0 +1,47 @@
+{
+  "act_bosses": [
+    {
+      "name": "БОСС: Король Гоблинов",
+      "role": "Король Гоблинов",
+      "hp": 160,
+      "actions": [
+        {"type": "Атака", "name": "Царский рубящий удар", "effects": [{"type": "damage", "value": 16}]},
+        {"type": "Защита", "name": "Стена щитов свиты", "effects": [{"type": "block", "value": 16}]},
+        {"type": "Заклинание", "name": "Жадность короля", "effects": [{"type": "damage", "value": 10}, {"type": "steal_stamina", "value": 1}]}
+      ]
+    },
+    {
+      "name": "БОСС: Верховный Лич",
+      "role": "Верховный Лич",
+      "hp": 150,
+      "actions": [
+        {"type": "Заклинание", "name": "Кольцо холода", "effects": [{"type": "damage", "value": 18}]},
+        {"type": "Исцеление", "name": "Похищение души", "effects": [{"type": "damage", "value": 10}, {"type": "heal", "value": 12}]},
+        {"type": "Защита", "name": "Барьер некромантии", "effects": [{"type": "block", "value": 18}]}
+      ]
+    },
+    {
+      "name": "БОСС: Кристальный дракон",
+      "role": "Дракон",
+      "hp": 185,
+      "actions": [
+        {"type": "Заклинание", "name": "Огненное дыхание", "effects": [{"type": "damage", "value": 20}]},
+        {"type": "Атака", "name": "Удар хвостом", "effects": [{"type": "damage", "value": 14}, {"type": "block", "value": 10}]},
+        {"type": "Защита", "name": "Чешуйчатый панцирь", "effects": [{"type": "block", "value": 20}]}
+      ]
+    }
+  ],
+  "final_bosses": [
+    {
+      "name": "СЕКРЕТНЫЙ БОСС: Тёмный Магический Рыцарь",
+      "role": "Тёмный Рыцарь",
+      "hp": 1350,
+      "actions": [
+        {"type": "Атака", "name": "Рассечение Бездны", "effects": [{"type": "damage", "value": 22, "pierce": true}]},
+        {"type": "Заклинание", "name": "Тёмный катаклизм", "effects": [{"type": "damage", "value": 28}]},
+        {"type": "Защита", "name": "Перековка проклятого доспеха", "effects": [{"type": "block", "value": 24}, {"type": "heal", "value": 15}]},
+        {"type": "Заклинание", "name": "Вытягивание воли", "effects": [{"type": "damage", "value": 14}, {"type": "steal_stamina", "value": 1}]}
+      ]
+    }
+  ]
+}

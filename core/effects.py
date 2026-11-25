@@ -79,6 +79,17 @@ class DrawEffect(Effect):
         return f"+{self.value} карта"
 
 
+class StealStaminaEffect(Effect):
+    def __init__(self, value: int):
+        self.value = value
+
+    def apply(self, source, target, context: dict) -> list[CombatEvent]:
+        target.pending_stamina_loss = getattr(target, "pending_stamina_loss", 0) + self.value
+        return [CombatEvent("steal_stamina", "player", self.value)]
+
+    def describe(self, scale: float = 1.0) -> str:
+        return f"-{self.value} стамины"
+
 class StaminaEffect(Effect):
     def __init__(self, value: int):
         self.value = value
@@ -123,4 +134,70 @@ def build_effects(raw_list: list[dict]) -> list[Effect]:
             result.append(StaminaEffect(val))
         elif etype == "steal_stamina":
             result.append(StealStaminaEffect(val))
+        elif etype == "max_stamina":
+            result.append(MaxStaminaEffect(val))
+        elif etype == "block_damage":
+            result.append(BlockDamageEffect(val, pierce=item.get("pierce", False)))
+        elif etype == "strip_block":
+            result.append(StripBlockEffect())
+        elif etype == "self_damage":
+            result.append(SelfDamageEffect(val))
+
     return result
+
+class MaxStaminaEffect(Effect):
+    """Увеличивает максимальную стамину героя до конца текущей игры/боя."""
+    def __init__(self, value: int):
+        self.value = value
+
+    def apply(self, source, target, context: dict) -> list[CombatEvent]:
+        if hasattr(source, "max_stamina"):
+            source.max_stamina += self.value
+            source.stamina += self.value
+        return [CombatEvent("stamina", "player", self.value)]
+
+    def describe(self, scale: float = 1.0) -> str:
+        return f"+{self.value} к макс. Стамине"
+
+
+class BlockDamageEffect(Effect):
+    """Наносит базовый урон + текущую броню самого атакующего."""
+    def __init__(self, value: int, pierce: bool = False):
+        self.value = value
+        self.pierce = pierce
+
+    def apply(self, source, target, context: dict) -> list[CombatEvent]:
+        base = int(self.value * context.get("scale", 1.0)) + getattr(source, "block", 0)
+        dmg = source.calculate_outgoing_damage(base)
+        real_dmg, blocked = target.take_damage(dmg, pierce=self.pierce)
+        who = "enemy" if context.get("source_is_player", True) else "player"
+        return [CombatEvent("damage", who, real_dmg, blocked)]
+
+    def describe(self, scale: float = 1.0) -> str:
+        return f"Наносит {int(self.value * scale)} + ваша броня урона"
+
+
+class StripBlockEffect(Effect):
+    """Полностью обнуляет текущую броню цели."""
+    def apply(self, source, target, context: dict) -> list[CombatEvent]:
+        removed = getattr(target, "block", 0)
+        target.block = 0
+        who = "enemy" if context.get("source_is_player", True) else "player"
+        return [CombatEvent("damage", who, 0, removed)]
+
+    def describe(self, scale: float = 1.0) -> str:
+        return "Сбрасывает всю броню врага"
+
+
+class SelfDamageEffect(Effect):
+    """Наносит урон самому владельцу карты (в обход его брони)."""
+    def __init__(self, value: int):
+        self.value = value
+
+    def apply(self, source, target, context: dict) -> list[CombatEvent]:
+        real_dmg, _ = source.take_damage(self.value, pierce=True)
+        who = "player" if context.get("source_is_player", True) else "enemy"
+        return [CombatEvent("damage", who, real_dmg, 0)]
+
+    def describe(self, scale: float = 1.0) -> str:
+        return f"Вы теряете {self.value} HP"

@@ -1,0 +1,38 @@
+{
+  "spark": {
+    "name": "Искра",
+    "type": "Заклинание",
+    "cost": 1,
+    "desc": "Наносит 8 урона.",
+    "effects": [{"type": "damage", "value": 8}]
+  },
+  "fireball": {
+    "name": "Огненный шар",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "Наносит 16 урона.",
+    "effects": [{"type": "damage", "value": 16}]
+  },
+  "mana_shield": {
+    "name": "Магический щит",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Даёт 7 защиты.",
+    "effects": [{"type": "block", "value": 7}]
+  },
+  "meditation": {
+    "name": "Медитация",
+    "type": "Заклинание",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "+1 Стамина, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 1}, {"type": "draw", "value": 1}]
+  },
+  "cauterize": {
+    "name": "Прижигание",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Восстанавливает 6 HP.",
+    "effects": [{"type": "heal", "value": 6}]
+  }
+}

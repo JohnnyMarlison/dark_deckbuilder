@@ -1,0 +1,37 @@
+{
+  "holy_strike": {
+    "name": "Удар света",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 7 урона.",
+    "effects": [{"type": "damage", "value": 7}]
+  },
+  "aegis_faith": {
+    "name": "Эгида веры",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Даёт 8 защиты.",
+    "effects": [{"type": "block", "value": 8}]
+  },
+  "lay_on_hands": {
+    "name": "Возложение рук",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Восстанавливает 9 HP.",
+    "effects": [{"type": "heal", "value": 9}]
+  },
+  "judgment": {
+    "name": "Правосудие",
+    "type": "Заклинание",
+    "cost": 2,
+    "desc": "Наносит 10 урона, лечит 4 HP.",
+    "effects": [{"type": "damage", "value": 10}, {"type": "heal", "value": 4}]
+  },
+  "blessed_shield": {
+    "name": "Святой щит",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Даёт 5 защиты, лечит 3 HP.",
+    "effects": [{"type": "block", "value": 5}, {"type": "heal", "value": 3}]
+  }
+}

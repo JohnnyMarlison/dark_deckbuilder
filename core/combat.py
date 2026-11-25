@@ -2,7 +2,7 @@ from core.run_state import RunState
 from core.enemy import Enemy, create_enemy_for_stage
 from core.card import Card, EnemyAction
 from core.effects import CombatEvent
-from core.records import update_record, check_stage_achievements
+from core.records import update_record, check_stage_achievements, mark_enemy_seen, mark_cards_seen
 
 
 class CombatEngine:
@@ -14,15 +14,31 @@ class CombatEngine:
         self.enemy: Enemy | None = None
 
     def setup_encounter(self) -> Enemy:
+        self.hero.pending_stamina_loss = 0
         self.hero.prepare_for_battle()
         self.enemy = create_enemy_for_stage(self.run.stage, self.run.round_idx, self.run.ng_level)
+        mark_enemy_seen(self.enemy.name)
         return self.enemy
 
     def begin_player_turn(self) -> list[CombatEvent]:
-        events = self.hero.trigger_turn_start()
+        events: list[CombatEvent] = []
         self.hero.start_turn()
+
+        # Применяем штраф от кражи стамины врагом ПОСЛЕ восстановления базовой стамины
+        loss = getattr(self.hero, "pending_stamina_loss", 0)
+        if loss > 0:
+            self.hero.stamina = max(0, self.hero.stamina - loss)
+            self.hero.pending_stamina_loss = 0
+
         if self.enemy:
             self.enemy.choose_action()
+            if hasattr(self.enemy, "roll_intent"):
+                self.enemy.roll_intent()
+            elif hasattr(self.enemy, "choose_intent"):
+                self.enemy.choose_intent()
+            elif hasattr(self.enemy, "pick_action"):
+                self.enemy.pick_action()
+
         return events
 
     def can_play_card(self, card: Card) -> bool:
@@ -33,15 +49,17 @@ class CombatEngine:
         if not self.enemy or not self.can_play_card(card):
             return [], "CONTINUE"
 
-        self.hero.stamina -= card.cost
         if card in self.hero.hand:
             self.hero.hand.remove(card)
+
+        self.hero.stamina = max(0, self.hero.stamina - card.cost)
         # Сначала применяем эффекты (добор тянет только из старого сброса/колоды)
         events = card.play(self.hero, self.enemy)
+        mark_cards_seen([c.card_id for c in self.hero.hand])
 
+        # И только потом убираем сыгранную карту в соответствующий сброс (если она не Изгоняется)
         if not getattr(card, "exhaust", False):
-            self.hero.discard_pile.append(card)
-
+            self.hero.discard_card(card)
 
         if not self.enemy.is_alive:
             check_stage_achievements(self.hero.name, self.run.stage, self.run.ng_level, self.enemy.role)
@@ -65,7 +83,6 @@ class CombatEngine:
         if not self.enemy or not self.enemy.planned_action:
             return [], "CONTINUE"
 
-        self.enemy.reset_block()
         events = self.enemy.trigger_turn_start()
         act = self.enemy.planned_action
         events.extend(act.execute(self.enemy, self.hero))

@@ -1,0 +1,131 @@
+{
+  "neutral_light_strike": {
+    "name": "Лёгкий удар",
+    "type": "Атака",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 4,
+    "desc": "Наносит 5 урона.",
+    "effects": [{"type": "damage", "value": 5}]
+  },
+  "neutral_medium_strike": {
+    "name": "Средний удар",
+    "type": "Атака",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 4,
+    "desc": "Наносит 7 урона.",
+    "effects": [{"type": "damage", "value": 7}]
+  },
+  "neutral_heavy_strike": {
+    "name": "Крепкий удар",
+    "type": "Атака",
+    "cost": 2,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Наносит 9 урона.",
+    "effects": [{"type": "damage", "value": 9}]
+  },
+  "neutral_piercing_strike": {
+    "name": "Пронзающий удар",
+    "type": "Атака",
+    "cost": 3,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Наносит 11 урона сквозь броню.",
+    "effects": [{"type": "damage", "value": 11, "pierce": true}]
+  },
+  "neutral_crushing_strike": {
+    "name": "Сокрушительный удар",
+    "type": "Атака",
+    "cost": 3,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Наносит 13 урона.",
+    "effects": [{"type": "damage", "value": 13}]
+  },
+  "neutral_small_heal": {
+    "name": "Маленькое зелье исцеления",
+    "type": "Исцеление",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 4,
+    "desc": "Восстанавливает 4 HP.",
+    "effects": [{"type": "heal", "value": 4}]
+  },
+  "neutral_medium_heal": {
+    "name": "Среднее зелье исцеления",
+    "type": "Исцеление",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Восстанавливает 6 HP.",
+    "effects": [{"type": "heal", "value": 6}]
+  },
+  "neutral_large_heal": {
+    "name": "Большое зелье исцеления",
+    "type": "Исцеление",
+    "cost": 2,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Восстанавливает 8 HP.",
+    "effects": [{"type": "heal", "value": 8}]
+  },
+  "neutral_huge_heal": {
+    "name": "Крупнейшее зелье исцеления",
+    "type": "Исцеление",
+    "cost": 3,
+    "neutral": true,
+    "pool_count": 2,
+    "desc": "Восстанавливает 12 HP.",
+    "effects": [{"type": "heal", "value": 12}]
+  },
+  "neutral_small_shield": {
+    "name": "Маленькое зелье защиты",
+    "type": "Защита",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Даёт +2 брони.",
+    "effects": [{"type": "block", "value": 2}]
+  },
+  "neutral_medium_shield": {
+    "name": "Среднее зелье защиты",
+    "type": "Защита",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 3,
+    "desc": "Даёт +4 брони.",
+    "effects": [{"type": "block", "value": 4}]
+  },
+  "neutral_small_pill": {
+    "name": "Маленькая пилюля силы",
+    "type": "Заклинание",
+    "cost": 0,
+    "neutral": true,
+    "pool_count": 3,
+    "exhaust": true,
+    "desc": "+1 Стамина, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 1}, {"type": "draw", "value": 1}]
+  },
+  "neutral_medium_pill": {
+    "name": "Средняя пилюля силы",
+    "type": "Заклинание",
+    "cost": 1,
+    "neutral": true,
+    "pool_count": 2,
+    "exhaust": true,
+    "desc": "+2 Стамины, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 2}, {"type": "draw", "value": 1}]
+  },
+  "neutral_large_pill": {
+    "name": "Большая пилюля силы",
+    "type": "Заклинание",
+    "cost": 2,
+    "neutral": true,
+    "pool_count": 1,
+    "exhaust": true,
+    "desc": "+3 Стамины, добор 1 карты. Изгнание.",
+    "effects": [{"type": "stamina", "value": 3}, {"type": "draw", "value": 1}]
+  }
+}

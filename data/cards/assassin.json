@@ -1,0 +1,38 @@
+{
+  "quick_stab": {
+    "name": "Быстрый выпад",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 5 урона, добор 1 карты.",
+    "effects": [{"type": "damage", "value": 5}, {"type": "draw", "value": 1}]
+  },
+  "backstab": {
+    "name": "Удар в спину",
+    "type": "Атака",
+    "cost": 1,
+    "desc": "Наносит 11 урона.",
+    "effects": [{"type": "damage", "value": 11}]
+  },
+  "shadow_step": {
+    "name": "Шаг в тень",
+    "type": "Защита",
+    "cost": 1,
+    "desc": "Даёт 6 защиты, добор 1 карты.",
+    "effects": [{"type": "block", "value": 6}, {"type": "draw", "value": 1}]
+  },
+  "adrenaline": {
+    "name": "Адреналин",
+    "type": "Заклинание",
+    "cost": 0,
+    "exhaust": true,
+    "desc": "+2 Стамины. Изгнание.",
+    "effects": [{"type": "stamina", "value": 2}]
+  },
+  "dark_elixir": {
+    "name": "Тёмный эликсир",
+    "type": "Исцеление",
+    "cost": 1,
+    "desc": "Восстанавливает 7 HP.",
+    "effects": [{"type": "heal", "value": 7}]
+  }
+}
