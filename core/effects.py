@@ -103,19 +103,6 @@ class StaminaEffect(Effect):
         return f"+{self.value} Стамины"
 
 
-class StealStaminaEffect(Effect):
-    def __init__(self, value: int):
-        self.value = value
-
-    def apply(self, source, target, context: dict) -> list[CombatEvent]:
-        if hasattr(target, "pending_stamina_loss"):
-            target.pending_stamina_loss += self.value
-        return [CombatEvent("steal_stamina", "player", self.value)]
-
-    def describe(self, scale: float = 1.0) -> str:
-        return f"-{self.value} стамины"
-
-
 def build_effects(raw_list: list[dict]) -> list[Effect]:
     """Фабрика создания объектов эффектов из JSON-описания."""
     result: list[Effect] = []

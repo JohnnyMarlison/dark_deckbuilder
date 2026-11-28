@@ -3,7 +3,6 @@ from config import SCREEN_WIDTH, BG_DARK, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTE
 from core.run_state import RunState
 from visuals.ui.card_widget import CardWidget
 from visuals.ui.achievement_popup import AchievementToastManager
-from visuals.ui.text_cache import TextCache
 
 class BossRewardView(arcade.View):
     """Выбор 2 из 4 усиленных карт в колоду после победы над Боссом."""

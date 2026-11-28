@@ -1,105 +1,6 @@
-import json
-import os
-import random
 import math
 import arcade
-from config import BORDER_GOLD
-from core.entity import Entity
-from core.card import EnemyAction
-from core.effects import build_effects
 
-
-class Enemy(Entity):
-    def __init__(self, name: str, role: str, base_hp: int, is_boss: bool, actions: list[EnemyAction],
-                 ng_level: int = 0):
-        hp_scale = 1.0 + ng_level * 0.35
-        super().__init__(name, int(base_hp * hp_scale))
-        self.role = role
-        self.is_boss = is_boss
-        self.ng_level = ng_level
-        self.actions = actions
-
-        self.planned_action: EnemyAction | None = None
-        self.last_action_text: str = "Первый ход (действий еще не было)"
-
-    def _s(self, val: int) -> int:
-        return int(val * (1.0 + self.ng_level * 0.25))
-
-    def choose_action(self) -> EnemyAction:
-        self.planned_action = random.choice(self.actions)
-        return self.planned_action
-
-
-def create_enemy_for_stage(stage: int, round_idx: int, ng_level: int = 0) -> Enemy:
-    """
-    stage: 1, 2, 3 (Миры)
-    round_idx: 1, 2 (Обычные/Элитные), 3 (Босс)
-    """
-    action_scale = 1.0 + ng_level * 0.25
-    is_boss = (round_idx >= 3)
-
-    # Уникальные элитные враги 3-го мира перед финальным боссом
-    if stage == 3 and not is_boss:
-        elite_pool = [
-            {
-                "name": "ЭЛИТА: Костяной Страж с Топором",
-                "role": "Огр",  # Переиспользуем замах Огра для тяжелого топора
-                "hp": 130,
-                "actions": [
-                    {"type": "Атака", "name": "Казнящий замах", "effects": [{"type": "damage", "value": 18}]},
-                    {"type": "Защита", "name": "Тяжелый доспех стражи", "effects": [{"type": "block", "value": 15}]}
-                ]
-            },
-            {
-                "name": "ЭЛИТА: Чёрный Скелет-Маг",
-                "role": "Злой Волшебник",  # Переиспользуем анимацию каста мага
-                "hp": 110,
-                "actions": [
-                    {"type": "Заклинание", "name": "Стрела Бездны", "effects": [{"type": "damage", "value": 14}]},
-                    {"type": "Заклинание", "name": "Проклятие увядания",
-                     "effects": [{"type": "damage", "value": 8}, {"type": "steal_stamina", "value": 1}]}
-                ]
-            }
-        ]
-        chosen = random.choice(elite_pool)
-        actions = [EnemyAction(a["type"], a["name"], build_effects(a.get("effects", [])), scale=action_scale) for a in
-                   chosen["actions"]]
-        return Enemy(chosen["name"], chosen["role"], chosen["hp"], is_boss=False, actions=actions, ng_level=ng_level)
-
-    # Чтение стандартных пулов из JSON
-    path = os.path.join("data", "enemies.json")
-    with open(path, "r", encoding="utf-8") as f:
-        pool_data = json.load(f)
-
-    if not is_boss:
-        # Мир 1: слабые враги, Мир 2: сильные враги
-        sub_pool = pool_data["regular"]
-        if stage == 1:
-            candidates = [e for e in sub_pool if e["role"] in ("Гоблин", "Скелет", "Слизняк", "Вор")]
-        else:
-            candidates = [e for e in sub_pool if e["role"] in ("Огр", "Скелет-стрелок", "Зомби", "Мумия")]
-
-        # Защита от пустого пула
-        if not candidates:
-            candidates = sub_pool
-        chosen = random.choice(candidates)
-    else:
-        # 3 Мир — гарантированный Секретный Тёмный Рыцарь, 1 и 2 миры — обычные боссы
-        if stage == 3:
-            chosen = pool_data.get("rare_bosses", pool_data["bosses"])[0]
-        else:
-            chosen = random.choice(pool_data["bosses"])
-
-    # Дополнительное усиление босса 2-го мира
-    hp_multiplier = 1.25 if (is_boss and stage == 2) else 1.0
-    final_hp = int(chosen["hp"] * hp_multiplier)
-
-    actions = []
-    for act in chosen.get("actions", []):
-        act_scale = action_scale * (1.15 if (is_boss and stage == 2) else 1.0)
-        actions.append(EnemyAction(act["type"], act["name"], build_effects(act.get("effects", [])), scale=act_scale))
-
-    return Enemy(chosen["name"], chosen["role"], final_hp, is_boss=is_boss, actions=actions, ng_level=ng_level)
 
 def _draw_supreme_lich(cx: float, cy: float, s: float, d: float, t: float, breath: float):
     """Детализированный спрайт Верховного Лича по концепт-арту (синяя мантия, костяная корона, зелёный огонь)."""
@@ -3126,9 +3027,8 @@ def _draw_evil_wizard(cx: float, cy: float, s: float, d: float, t: float, b: flo
 
 
 
-def draw_enemy_sprite(role: str, cx: float, cy: float, s: float, d: int, b: float, t: float, state: str = "idle", prog: float = 0.0):
+def draw_enemy_sprite(role: str, cx: float, cy: float, s: float, d: int, b: float, t: float):
     """Рисует детализированную дарк-фэнтези фигурку врага с уникальной анимацией."""
-    atk = prog if state == "casting" else 0.0
 
     if role == "Чёрный Скелет-Маг":
         _draw_black_skeleton_mage(cx, cy, s, d, t, b)

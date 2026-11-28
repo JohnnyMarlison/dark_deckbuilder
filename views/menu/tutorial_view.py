@@ -1,5 +1,5 @@
 import arcade
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, BG_DARK, PANEL_DARK, PANEL_ENEMY, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, BG_DARK, PANEL_DARK, PANEL_ENEMY, BORDER_GOLD, TEXT_PARCHMENT
 from core.card import Card
 from core.effects import DamageEffect, BlockEffect
 from visuals.sprites.avatar import CharacterAvatar

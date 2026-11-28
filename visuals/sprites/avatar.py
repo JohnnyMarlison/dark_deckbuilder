@@ -102,7 +102,7 @@ class CharacterAvatar:
         if self.role in ("Воин", "Элементалист", "Паладин", "Ассасин"):
             draw_hero_sprite(self.role, cx, cy, s, d, b, self.time, self.weapon_angle)
         else:
-            draw_enemy_sprite(self.role, cx, cy, s, d, b, self.time, self.state, self.cast_progress)
+            draw_enemy_sprite(self.role, cx, cy, s, d, b, self.time)
 
         if self.state == "thinking":
             bx = cx + 28 * d * s

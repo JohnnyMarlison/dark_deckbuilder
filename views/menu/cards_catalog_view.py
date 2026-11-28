@@ -67,7 +67,7 @@ class CardsCatalogView(arcade.View):
     def on_show_view(self):
         arcade.set_background_color(BG_DARK)
 
-    def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
+    def on_mouse_scroll(self, x: int, y: int, _scroll_x: int, scroll_y: int):
         self.scroll_y = max(0.0, min(self.max_scroll, self.scroll_y - scroll_y * 55.0))
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):

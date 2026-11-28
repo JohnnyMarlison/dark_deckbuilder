@@ -1,5 +1,5 @@
 import arcade
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, PANEL_DARK, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
 from core.records import PENDING_ACHIEVEMENT_POPUPS
 from visuals.ui.icons import draw_card_icon
 from visuals.ui.text_cache import TextCache

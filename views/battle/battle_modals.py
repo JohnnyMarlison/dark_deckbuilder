@@ -204,6 +204,3 @@ class BattleModals:
         arcade.draw_rect_filled(arcade.XYWH(bx, by, bw, bh), btn_bg)
         arcade.draw_rect_outline(arcade.XYWH(bx, by, bw, bh), btn_brd, 3 if hov else 2)
         ui.draw(btn_label, bx, by, btn_txt_col, 18, bold=True, anchor_x="center", anchor_y="center")
-
-    def handle_pile_click(self, x: float, y: float) -> bool:
-        return self.handle_click(x, y)
