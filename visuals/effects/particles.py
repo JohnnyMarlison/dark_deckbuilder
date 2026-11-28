@@ -16,7 +16,6 @@ class SpellProjectile:
         self.target_x = target_x
         self.target_y = target_y
         self.end_x = target_x
-        self.end_y = target_y
         self.color = color[:3]
         self.radius = radius
         self.speed = 1950.0

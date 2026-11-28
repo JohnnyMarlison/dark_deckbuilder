@@ -20,7 +20,6 @@ class RunState:
         self.round_idx: int = 1
         self.ng_level: int = 0
         self.total_turns: int = 1
-        self.bonuses: dict[str, int] = {"max_hp": 0, "damage": 0, "heal": 0}
         self.current_location_name: str = random.choice(WORLD_LOCATIONS.get(1, ("Мрачный лес",)))
         self.bonuses: dict[str, int] = {
             "max_hp": 0,
@@ -33,26 +32,18 @@ class RunState:
         }
 
 
-    @property
-    def location(self) -> int:
-        return self.stage
-
-    @property
-    def round_num(self) -> int:
-        return self.round_idx
-
-    @property
-    def location_title(self) -> str:
-        return f"МИР {self.stage}: {self.current_location_name.upper()}"
-
     def advance_step(self):
         if self.round_idx < 3:
             self.round_idx += 1
         else:
-            self.stage += 1
-            self.round_idx = 1
-            pool = WORLD_LOCATIONS.get(self.stage, ("Бездна Тьмы",))
-            self.current_location_name = random.choice(pool)
+            self.advance_world()
+
+    def advance_world(self):
+        """Переход к следующему миру: сброс раунда и новая случайная локация."""
+        self.stage += 1
+        self.round_idx = 1
+        pool = WORLD_LOCATIONS.get(self.stage, ("Бездна Тьмы",))
+        self.current_location_name = random.choice(pool)
 
 
     def apply_full_heal(self) -> int:

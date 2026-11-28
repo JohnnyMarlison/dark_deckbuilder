@@ -1,6 +1,4 @@
 from collections import Counter
-import json
-import os
 import arcade
 from config import SCREEN_WIDTH, SCREEN_HEIGHT, BG_DARK, PANEL_DARK, PANEL_ENEMY, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
 from core.hero import load_hero_templates
@@ -126,7 +124,7 @@ class HeroesEncyclopediaView(arcade.View):
         for entry in self._current_entries():
             entry["avatar"].update(delta_time)
 
-    def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
+    def on_mouse_scroll(self, x: int, y: int, _scroll_x: int, scroll_y: int):
         if self.active_modal is None:
             self.scroll_y = max(0.0, min(self.max_scroll, self.scroll_y - scroll_y * 55.0))
 

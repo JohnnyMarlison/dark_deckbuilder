@@ -57,8 +57,6 @@ class Card:
 
     def create_upgraded_copy(self) -> "Card":
         """Создает усиленную версию карты для награды после босса."""
-        from core.effects import DamageEffect, BlockEffect, HealEffect, DrawEffect, StaminaEffect
-
         new_effects = []
         desc_parts = []
         for eff in self.effects:

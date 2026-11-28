@@ -1,16 +1,11 @@
 import arcade
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, BG_DARK, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
+from config import SCREEN_WIDTH, BG_DARK, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
 from core.card import Card
 from core.effects import DamageEffect
 from visuals.sprites.avatar import CharacterAvatar
 from visuals.ui.card_widget import CardWidget
 from visuals.effects.particles import SpellProjectile, FloatingEffect
 from visuals.ui.text_cache import TextCache
-from views.menu.hero_select_view import HeroSelectView
-from views.menu.heroes_encyclopedia_view import HeroesEncyclopediaView
-from views.menu.cards_catalog_view import CardsCatalogView
-from views.menu.tutorial_view import TutorialView
-from views.menu.records_view import RecordsView
 from core.events import bus
 
 

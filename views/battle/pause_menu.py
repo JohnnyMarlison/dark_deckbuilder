@@ -1,5 +1,5 @@
 import arcade
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, PANEL_DARK, BORDER_GOLD, TEXT_PARCHMENT, TEXT_MUTED
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, PANEL_DARK, BORDER_GOLD, TEXT_PARCHMENT
 from core.events import bus
 
 
@@ -85,20 +85,6 @@ class BattlePauseMenu:
                         self.hovered_id = None
                     return True
             return True
-
-        if self.state == "CONFIRM_EXIT":
-            if self._in_rect(x, y, self.confirm_yes_btn):
-                bus.emit("ui_click")
-                self.state = "CLOSED"
-                from views.menu.menu_view import MenuView
-                self.v.window.show_view(MenuView())
-            elif self._in_rect(x, y, self.confirm_no_btn):
-                bus.emit("ui_click")
-                self.state = "MAIN"
-                self.hovered_id = None
-            return True
-
-        return True
 
         if self.state == "CONFIRM_EXIT":
             if self._in_rect(x, y, self.confirm_yes_btn):

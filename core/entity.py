@@ -22,7 +22,6 @@ class Entity:
         self.max_hp = max_hp
         self.hp = max_hp
         self.block = 0
-        self.statuses: dict[str, int] = {}
         self.modifiers: list[Modifier] = []
 
     @property
@@ -63,12 +62,6 @@ class Entity:
 
         self.hp = max(0, self.hp - real_dmg)
         return real_dmg, blocked
-
-    def apply_status(self, status_name: str, stacks: int):
-        if stacks != 0:
-            self.statuses[status_name] = self.statuses.get(status_name, 0) + stacks
-            if self.statuses[status_name] <= 0:
-                del self.statuses[status_name]
 
     def trigger_turn_start(self) -> list:
         events = []

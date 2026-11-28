@@ -6,3 +6,8 @@ dist
 main.build
 main.dist
 build
+
+# байт-код Python
+__pycache__/
+*.pyc
+*.pyo

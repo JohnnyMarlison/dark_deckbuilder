@@ -1,6 +1,6 @@
 import math
 import arcade
-from config import BORDER_GOLD
+
 
 def _draw_warrior_knight(cx: float, cy: float, s: float, d: float, t: float, b: float):
     """Детализированный спрайт Воина по референсу (индиговое сюрко с орлами, меч наперевес, гербовый щит)."""

@@ -25,7 +25,6 @@ class CardWidget:
 
         self.hero_class = getattr(card_data, "hero_class", "")
         self.neutral = getattr(card_data, "neutral", True)
-        accent_color = CLASS_ACCENTS.get(self.hero_class, BORDER_GOLD)
         self._txt_class = arcade.Text(
             self.hero_class,
             x,
@@ -79,12 +78,6 @@ class CardWidget:
             self.desc, x, y, TEXT_PARCHMENT, 13,
             width=int(self.width - 26), align="center", anchor_x="center", anchor_y="center", multiline=True
         )
-
-    def refresh_text(self):
-        """Обновляет кэш текста, если характеристики карты изменились в бою."""
-        self._txt_cost.text = str(self.cost)
-        self._txt_name.text = self.name
-        self._txt_desc.text = self.desc
 
     def is_clicked(self, mx: float, my: float) -> bool:
         # Проверяем хитбокс по целевой позиции, чтобы избежать двойных кликов при перекладке руки

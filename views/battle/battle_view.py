@@ -3,9 +3,9 @@ import arcade
 from config import SCREEN_WIDTH, SCREEN_HEIGHT, BG_DARK, BORDER_GOLD, TEXT_PARCHMENT
 from core.card import Card, load_card_library
 from core.combat import CombatEngine, CombatEvent
-from core.enemy import Enemy, create_enemy_for_stage
+from core.enemy import Enemy
 from core.events import bus
-from core.records import update_record, check_stage_achievements, mark_enemy_seen, mark_cards_seen
+from core.records import check_stage_achievements
 from core.run_state import RunState
 from visuals.effects.vfx_director import VFXDirector
 from visuals.locations import draw_location_background
@@ -13,7 +13,6 @@ from visuals.sprites.avatar import CharacterAvatar
 from visuals.ui.card_widget import CardWidget
 from visuals.ui.icons import draw_enemy_choice_icons
 from visuals.ui.text_cache import TextCache
-from visuals.ui.achievement_popup import AchievementToastManager
 from views.battle.battle_hud import BattleHUD
 from views.battle.battle_modals import BattleModals
 from views.battle.pause_menu import BattlePauseMenu
@@ -167,6 +166,7 @@ class BattleView(arcade.View):
         widget.target_y = 590
         self.playing_widget = widget
         self.play_timer = 0.35
+        bus.emit("card_played", card=card)
 
     def _open_stage_reward(self):
         import importlib
@@ -185,28 +185,6 @@ class BattleView(arcade.View):
                     return
         raise ModuleNotFoundError("Не найден экран наград в пакете views/")
 
-    def _show_end_screen(self, victory: bool):
-        import importlib
-        import pkgutil
-        import views
-
-        self.vfx.unbind()
-        # 1. Если в проекте есть отдельный экран GameOverView — открываем его
-        for _, mod_name, is_pkg in pkgutil.walk_packages(views.__path__, views.__name__ + "."):
-            if is_pkg or "game_over" not in mod_name.lower():
-                continue
-            module = importlib.import_module(mod_name)
-            cls = getattr(module, "GameOverView", None)
-            if cls is not None:
-                self.window.show_view(cls(self.run, victory=victory))
-                return
-
-        # 2. Иначе показываем встроенный экран победы / поражения поверх BattleView
-        self.substate = "FINAL_VICTORY" if victory else "GAME_OVER"
-        self.ng_continue_btn = (SCREEN_WIDTH / 2 - 185, 415, 320, 62)
-        self.ng_exit_btn = (SCREEN_WIDTH / 2 + 185, 415, 320, 62) if victory else (SCREEN_WIDTH / 2, 415, 320, 62)
-
-
     def _resolve_player_card(self, widget: CardWidget):
         events, outcome = self.engine.play_player_card(widget.data)
         self._spawn_visuals_for_events(events)
@@ -219,7 +197,6 @@ class BattleView(arcade.View):
             self._prepare_boss_victory()
         elif outcome == "FINAL_VICTORY":
             self.vfx.unbind()
-            self._is_final_boss = True
             self._prepare_boss_victory()
 
         if outcome == "GAME_OVER":
@@ -244,16 +221,6 @@ class BattleView(arcade.View):
         self.substate = "BOSS_VICTORY"
         self.message = "Босс повержен! Выберите 2 карты в награду."
 
-    def _on_enemy_defeated(self):
-        self.playing_widget = None
-        self.enemy_playing_widget = None
-        self.enemy_attack_pending = False
-
-        if self.enemy and self.enemy.is_boss:
-            self._prepare_boss_victory()
-        else:
-            self._open_stage_reward()
-
     def _end_player_turn(self):
         if self.playing_widget or self.enemy_attack_pending or not self.enemy or self.substate != "FIGHT":
             return
@@ -273,30 +240,7 @@ class BattleView(arcade.View):
             self.enemy_playing_widget = ew
             bus.emit("enemy_action_started", action=act)
 
-        self.turn_count += 1
-        self.message = f"Этап {self.run.round_idx}/3 (Ход {self.turn_count}). Ваш ход!"
         self._sync_hand_widgets()
-
-    def _on_enemy_defeated(self):
-        self.playing_widget = None
-        self.enemy_playing_widget = None
-        self.enemy_attack_pending = False
-
-        if self.enemy and self.enemy.is_boss:
-            all_cards = list(load_card_library().values())
-            class_tag = self.hero.name.upper()
-            pool = [c for c in all_cards if c.hero_class == class_tag or c.neutral]
-            import random
-            chosen = random.sample(pool, min(3, len(pool)))
-            self.boss_rewards = [c.create_upgraded_copy() for c in chosen]
-            self.modals.setup_boss_rewards(self.boss_rewards)
-            self.substate = "BOSS_VICTORY"
-            self.message = "Босс повержен! Выберите карту в награду."
-
-        else:
-            self.vfx.unbind()
-            from views.battle.reward_view import StageRewardView
-            self.window.show_view(StageRewardView(self.run))
 
     def _resolve_enemy_turn(self):
         self.enemy_playing_widget = None
@@ -308,8 +252,9 @@ class BattleView(arcade.View):
 
         if status == "GAME_OVER":
             self.vfx.unbind()
-            from views.menu.game_over_view import GameOverView
-            self.window.show_view(GameOverView(self.run, victory=False))
+            self.substate = "GAME_OVER"
+            self.ng_exit_btn = (SCREEN_WIDTH / 2, 415, 330, 62)
+            self.message = "ВЫ ПАЛИ ВО ТЬМЕ !"
             return
 
         start_events = self.engine.begin_player_turn()
@@ -331,8 +276,7 @@ class BattleView(arcade.View):
             self.ng_continue_btn = (SCREEN_WIDTH / 2 - 190, 415, 330, 62)
             self.ng_exit_btn = (SCREEN_WIDTH / 2 + 190, 415, 330, 62)
         else:
-            self.run.stage += 1
-            self.run.round_idx = 1
+            self.run.advance_world()
             self.window.show_view(BattleView(self.run))
 
     def on_update(self, delta_time: float):
@@ -465,15 +409,7 @@ class BattleView(arcade.View):
             return
 
         if self.substate in ("FINAL_VICTORY", "GAME_OVER"):
-            if self.substate == "FINAL_VICTORY" and self._in_rect(x, y, self.ng_continue_btn):
-                self.run.start_new_game_plus()
-                self.window.show_view(BattleView(self.run))
-                return
-            if self._in_rect(x, y, self.ng_exit_btn):
-                from views.menu.menu_view import MenuView
-                self.window.show_view(MenuView())
             return
-
 
         if self.modals.is_open or self.substate == "BOSS_VICTORY":
             self.modals.on_mouse_motion(x, y)
@@ -490,6 +426,17 @@ class BattleView(arcade.View):
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         if button != arcade.MOUSE_BUTTON_LEFT:
             return
+
+        if self.substate in ("FINAL_VICTORY", "GAME_OVER"):
+            if self.substate == "FINAL_VICTORY" and self._in_rect(x, y, self.ng_continue_btn):
+                self.run.start_new_game_plus()
+                self.window.show_view(BattleView(self.run))
+                return
+            if self._in_rect(x, y, self.ng_exit_btn):
+                from views.menu.menu_view import MenuView
+                self.window.show_view(MenuView())
+            return
+
         if self.pause_menu.handle_click(x, y):
             return
         if self.modals.handle_click(x, y):
@@ -516,7 +463,7 @@ class BattleView(arcade.View):
                     self._start_play_card(w)
                     return
 
-    def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
+    def on_mouse_scroll(self, x: int, y: int, _scroll_x: int, scroll_y: int):
         self.modals.on_mouse_scroll(scroll_y)
 
     def on_key_press(self, key: int, modifiers: int):
